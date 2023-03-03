@@ -103,7 +103,8 @@ class DossierController extends Controller
         $bilans = $dossier->bilans;
         $traitements = $dossier->traitements;
         $visites = $dossier->visites ;
-        return view("dossiers/show")->with('dossiers', $dossier)->with('ordonnance', $ordonnances)->with("bilan", $bilans)->with("traitement", $traitements)->with("visites", $visites);;
+        $documents = $dossier->documents ;
+        return view("dossiers/show")->with('dossiers', $dossier)->with('ordonnance', $ordonnances)->with("bilan", $bilans)->with("traitement", $traitements)->with("visites", $visites)->with("documents", $documents);
     }
 
     /**

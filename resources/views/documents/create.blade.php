@@ -216,24 +216,17 @@
               <section class="container">
                 <header>Document/images/vedios</header>
 
-                <div class="row">
-                  <div class="col mb-3">
-                    <div class="wrapper">
+                
+                
+                <form action="{{ route('documents.store') }}"class="form1" method="POST" enctype="multipart/form-data">
+                  
+                  {!! csrf_field()!!}
+                  <div class="row">
+                    <div class="col mb-3">
+                      <input type="hidden" name="dossier_id" value="{{ $dossier->id }}">
                       
-                      <form action="#" class="form">
-                        
-                        <input class="file-input" type="file" name="file" hidden>
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Browse File to Upload</p>
-
-                      </form>
-                      <section class="progress-area"></section>
-                      <section class="uploaded-area"></section>
                     </div>
                   </div>
-                </div>
-                
-                <form action="#" class="form1">
 
                   <div class="row">
                     <div class="col mb-3">
@@ -242,12 +235,15 @@
                           type="date"
                           id="dateimport"
                           class="form-control"
-                          name="datedocument"
+                          name="datedocuments"
                           
                       />
                     </div>
                   </div>
-
+                  <div class="form-group">
+                    <label for="file">File:</label>
+                    <input type="file" class="form-control-file" id="file" name="file" required>
+                </div>
                   
 
                   
@@ -258,7 +254,7 @@
                           type="text"
                           id="descdocument"
                           class="form-control"
-                          name="descriptiondocument"
+                          name="descriptiondocuments"
                           
                       />
                     </div>
@@ -267,7 +263,7 @@
                   
                 
                 
-                  <button>Save changes</button>
+                  <button type="submit">Save changes</button>
                 </form>
               </section>
             </div>
@@ -291,6 +287,26 @@
 
 
 
-    @include('medecin.js')
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="/assets/vendor/libs/popper/popper.js"></script>
+    <script src="/assets/vendor/js/bootstrap.js"></script>
+    <script src="/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="/assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>

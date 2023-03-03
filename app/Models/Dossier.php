@@ -55,7 +55,10 @@ class Dossier extends Model
         return $this->hasMany(Visite::class);
     }
 
-    
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     //public function ordonnance(){
         //return $this->hasMany('App\Ordonnance');
     //}

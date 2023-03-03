@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Document;
+use App\Models\Dossier;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -24,10 +25,14 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($dossier_id)
     {
-        return view("documents/create");
+        $dossier = Dossier::find($dossier_id);
+        return view("documents/create", compact('dossier'));
     }
+
+    
+
 
     /**
      * Store a newly created resource in storage.
@@ -37,13 +42,22 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $document = new Document();
-        $document->date = $request->input('datedocument');
-        $document->description = $request->input('descriptiondocument');
-        $document->file = $request->input('file');
-       
+        $dossier = Dossier::find($request->dossier_id);
+        
+
+        $document = new Document([
+            'datedocuments' => $request->get('datedocuments'),
+            'descriptiondocuments' => $request->get('descriptiondocuments'),
+            'file' => $request->file('file')->store('documents'),
+            
+            //'dossier_id' => $request->get('dossier_id')
+        ]);
+
+        $document->dossier_id = $request->input('dossier_id');
         $document->save();
-        return redirect ("/documents") ;
+        $dossier->documents()->save($document);
+
+        return redirect()->route('dossiers.show', $request->input('dossier_id'));
     }
 
     /**
@@ -66,7 +80,8 @@ class DocumentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $document = Document::find($id);
+        return view("documents.edit")->with('document', $document);
     }
 
     /**
@@ -76,9 +91,28 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Document $document)
     {
-        //
+        $request->validate([
+            'datedocumets' => 'required|date',
+            'descriptiondocuments' => 'required|string',
+            'file' => 'nullable|file',
+            
+        ]);
+
+        $document->datedocumets = $request->get('datedocumets');
+        $document->descriptiondocuments = $request->get('descriptiondocuments');
+
+        if ($request->hasFile('file')) {
+            $document->file = $request->file('file')->store('documents');
+        }
+
+        $document->dossier_id = $request->get('dossier_id');
+
+        $document->save();
+
+        return redirect()->route('documents.liste')
+                         ->with('success', 'Document updated successfully');
     }
 
     /**

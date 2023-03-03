@@ -14,12 +14,16 @@ class Document extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'datedocumets',
+        'datedocuments',
         'descriptiondocuments',
         'file',
         
-        
     ];
+
+    public function dossier()
+    {
+        return $this->belongsTo(Dossier::class);
+    }
 
     
 }
