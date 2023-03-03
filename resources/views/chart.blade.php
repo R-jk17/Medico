@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Medico - Rendez-Vous</title>
+    <title>Medico - Factures</title>
 
     <meta name="description" content="" />
 
@@ -67,8 +67,6 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        <!-- Menu -->
-
         <!-- Menu -->
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -146,8 +144,8 @@
             </li>
 
             <!-- Cards -->
-            <li class="menu-item active">
-              <a href="rendezs" class="menu-link">
+            <li class="menu-item">
+              <a href="html/reservation.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
@@ -159,8 +157,7 @@
                 <div data-i18n="Basic">Patient</div>
               </a>
             </li>
-
-            <li class="menu-item ">
+            <li class="menu-item active">
               <a href="factures" class="menu-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
                   <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
@@ -170,6 +167,8 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
+
+            
            
             
           </ul>
@@ -196,15 +195,12 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
-                  <form action="" method="get">
                   <input
                     type="text"
                     class="form-control border-0 shadow-none"
                     placeholder="Search..."
                     aria-label="Search..."
-                    name="query"
                   />
-                </form>
                 </div>
               </div>
               <!-- /Search -->
@@ -233,117 +229,73 @@
              
   
               <div class="container-xxl flex-grow-1 container-p-y">
+
+                <form method="GET" action="{{ route('factures.chart') }}">
+                    <div class="form-group">
+                        <label for="month">Month:</label>
+                        <select class="form-control" id="month" name="month">
+                            <option value="">All</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year:</label>
+                        <input type="number" class="form-control" id="year" name="year" min="1900" max="{{ date('Y') }}" value="{{ date('Y') }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </form>
                 
   
                 <div class="row">
                   <div class="col-md-12">
-                    <form action="" method="get">
-                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">From</label>
-                          <input
-                              type="datetime-local"
-                              id="DateOrdonnace"
-                              class="form-control"
-                              name="from"
-                              value="{{ app('request')->input('from') ?? now('GMT+1')->subDays(1) }}"
 
-                          />
-                        </div>
-                      </div>
-                      </li>
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">To</label>
-                          <input
-                              type="datetime-local"
-                              id="DateOrdonnace"
-                              class="form-control"
-                              name="to"
-                              value="{{ app('request')->input('to') ?? now('GMT+1') }}"
-                          />
-                        </div>
-                      </div>
-                      </li>
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">.</label>
-                          <button 
-                          class="form-control" type="submit">SEND</button>
-                        </div>
-                      </div>
-                      </li>
-                      
-                    </ul>
-                  </form>
-                    <!-- Basic Bootstrap Table -->
-                <div class="card">
-                  <h5 class="card-header">Rendez-Vous</h5>
-                  <div class="table-responsive text-nowrap">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                            <th>L'heure</th>
-                            <th>Date</th>
-                            <th>Nom</th>
-                            <th>prénom</th>
-                            <th>N°Tlf</th>
-                            <th>gender</th>
-                            <th>Actions</th>
-                          </tr>
-                      </thead>
-                      <tbody class="table-border-bottom-0">
-                        @foreach($rendez as $item)
-                        <tr>
-                          <td>{{$item->heure }}</td>
-                          <td>{{$item->date }}</td>
-                          <td>{{$item->nom }}</td>
-                          <td>{{$item->prenom }}</td>
-                          <td>{{$item->tlf }}</td>
-                          <td>{{$item->gender }}</td>
-                          <td>
-                            <div class="dropdown">
-                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu">
-                                
-                                <a class="dropdown-item" href="{{ route('rendez.confirm', $item->id) }}" 
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-                                  ><i class='bx bxs-calendar-check'></i> Confirmer</a
-                                >
-                                <a class="dropdown-item" href="{{url('rendezs/'. $item->id )}}"
-                                  ><i class='bx bx-file'></i></i> Show</a
-                                >
-                                
-                                <a class="dropdown-item" href="{{url('rendezs/'. $item->id.'/edit' )}}"
-                                  ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                >
-                                
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
-                                  <i class="bx bx-trash me-1"></i> Supprimer
-                              </a>
-                              
-                              <form id="delete-form-{{ $item->id }}" action="{{ route('rendezs.destroy', $item->id) }}" method="POST" style="display: none;">
-                                  @csrf
-                                  @method('DELETE')
-                              </form>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                        @endforeach
-                       
-                        
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <!--/ Basic Bootstrap Table -->
+<script>
+    var income = {!! json_encode($income) !!};
+    var expenses = {!! json_encode($expenses) !!};
+
+    var data = {
+        labels: ['Income', 'Expenses'],
+        datasets: [
+            {
+                data: [income, expenses],
+                backgroundColor: ['#36a2eb', '#ff6384']
+            }
+        ]
+    };
+
+    var options = {
+        responsive: true
+    };
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: options
+    });
+</script>
+
+                    
+                    
+                    
 
             </div>
             <!-- / Content -->

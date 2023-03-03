@@ -18,6 +18,9 @@ class Visite extends Model
         'heure',
         'motifvisite',
         'descriptionvisite',
+        'montant',
+        'versement',
+
         
         
     ];

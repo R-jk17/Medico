@@ -152,7 +152,7 @@
             </li>
 
             <li class="menu-item ">
-              <a href="dossiers" class="menu-link">
+              <a href="..dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>

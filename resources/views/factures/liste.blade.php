@@ -233,7 +233,10 @@
   
                 <div class="row">
                   <div class="col-md-12">
+
                     
+                    <a href="{{ route('factures.chart') }}" class="btn btn-primary">View Chart</a>
+
                     <!-- Basic Bootstrap Table -->
                 <div class="card">
                   <h5 class="card-header">Factures</h5>
@@ -264,14 +267,14 @@
                                   ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                 >
                                 
-                                <a class="dropdown-item" href="javascript:void(0);"
-                                  title="Delete " onclick="return confirm("confirm delete ?")">
-                                  <form method="POST" action="{{url('factures'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                    {{method_field('DELETE')}}
-                                    {{ csrf_field() }} </form>
-
-                                  <i class="bx bx-trash me-1"></i> Supprimer</a
-                                >
+                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                  <i class="bx bx-trash me-1"></i> Supprimer
+                              </a>
+                              
+                              <form id="delete-form-{{ $item->id }}" action="{{ route('factures.destroy', $item->id) }}" method="POST" style="display: none;">
+                                  @csrf
+                                  @method('DELETE')
+                              </form>
                               </div>
                             </div>
                           </td>

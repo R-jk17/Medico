@@ -9,6 +9,7 @@ use App\Http\Controllers\TraitementController;
 use App\Http\Controllers\VisiteController;
 use App\Http\Controllers\RendezController;
 use App\Http\Controllers\FactureController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +48,7 @@ Route::get('/dossiers/{dossier_id}/bilans/create', [BilanController::class, 'cre
 Route::get('/dossiers/{dossier_id}/traitements/create', [TraitementController::class, 'create'])->name('traitements.create');
 Route::get('/dossiers/{dossier_id}/visites/create', [VisiteController::class, 'create'])->name('visites.create');
 Route::get('/rendezs/confirm/{id}', [RendezController::class, 'confirm'])->name('rendez.confirm');
+Route::get('/chart', [FactureController::class, 'chart'])->name('factures.chart');
 
 //Route::get('ordonnances/liste', [OrdonnanceController::class,'index']);
 //Route::get('ordonnances/create', [OrdonnanceController::class,'create']);

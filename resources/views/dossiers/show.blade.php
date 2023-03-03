@@ -417,14 +417,14 @@
                                           ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                         >
                                         
-                                        <a class="dropdown-item" href="javascript:void(0);"
-                                          title="Delete " onclick="return confirm("confirm delete ?")">
-                                          <form method="POST" action="{{url('visites'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                            {{method_field('DELETE')}}
-                                            {{ csrf_field() }} </form>
-        
-                                          <i class="bx bx-trash me-1"></i> Supprimer</a
-                                        >
+                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                          <i class="bx bx-trash me-1"></i> Supprimer
+                                      </a>
+                                      
+                                      <form id="delete-form-{{ $item->id }}" action="{{ route('visites.destroy', $item->id) }}" method="POST" style="display: none;">
+                                          @csrf
+                                          @method('DELETE')
+                                      </form>
                                       </div>
                                     </div>
                                   </td>
@@ -437,23 +437,7 @@
                             </div>
                           </div>
                           <!--/ Responsive Table -->
-                          <div class="col-lg-4 col-md-6">
                           
-                            <div class="mt-3">
-                            <!-- Button trigger modal -->
-                            <button
-                                type="button"
-                                class="btn btn-primary"
-                                
-                                
-                            ><a class="a1" href="{{ route('visites.create', ['dossier_id' => $dossiers->id]) }}"
-                                
-                            ><i class='bx bxs-file-plus'></i>
-                            Ajouter</a></button>
-
-                              
-                            </div>
-                          </div>
                           
            
                         
@@ -504,14 +488,14 @@
                                           ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                         >
                                         
-                                        <a class="dropdown-item" href="javascript:void(0);"
-                                          title="Delete " onclick="return confirm("confirm delete ?")">
-                                          <form method="POST" action="{{url('ordonnances'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                            {{method_field('DELETE')}}
-                                            {{ csrf_field() }} </form>
-        
-                                          <i class="bx bx-trash me-1"></i> Supprimer</a
-                                        >
+                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                          <i class="bx bx-trash me-1"></i> Supprimer
+                                      </a>
+                                      
+                                      <form id="delete-form-{{ $item->id }}" action="{{ route('ordonnances.destroy', $item->id) }}" method="POST" style="display: none;">
+                                          @csrf
+                                          @method('DELETE')
+                                      </form>
                                       </div>
                                     </div>
                                   </td>
@@ -583,14 +567,14 @@
                                           ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                         >
                                         
-                                        <a class="dropdown-item" href="javascript:void(0);"
-                                          title="Delete " onclick="return confirm("confirm delete ?")">
-                                          <form method="POST" action="{{url('ordonnances'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                            {{method_field('DELETE')}}
-                                            {{ csrf_field() }} </form>
-        
-                                          <i class="bx bx-trash me-1"></i> Supprimer</a
-                                        >
+                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                          <i class="bx bx-trash me-1"></i> Supprimer
+                                      </a>
+                                      
+                                      <form id="delete-form-{{ $item->id }}" action="{{ route('bilans.destroy', $item->id) }}" method="POST" style="display: none;">
+                                          @csrf
+                                          @method('DELETE')
+                                      </form>
                                       </div>
                                     </div>
                                   </td>
@@ -629,82 +613,7 @@
                       <div class="row">
   
                         <!-- Basic List group -->
-                            <div class="col-lg-6 mb-4 mb-xl-0">
-                              
-                              <div class="demo-inline-spacing mt-3">
-                                <!-- Responsive Table -->
-                                <div class="card">
-                                  <h5 class="card-header"><b>Visite Détailes</b></h5>
-                                  <div class="table-responsive text-nowrap">
-                                    <table class="table">
-                                    <thead>
-                                      <tr class="text-nowrap">
-                                        
-                                        <th>Date</th>
-                                        <th>Motif</th>
-                                        
-                                        <th>action</th>
-                          
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      @foreach($visites as $item)
-                                      <tr>
-                                        <td>{{$item->created_at ?? 'not exist'}}</td>
-                                        <td>{{$item->motifvisite ?? 'not exist '}}</td>
-                                        <td>
-                                          <div class="dropdown">
-                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                              <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                              <a class="dropdown-item" href="{{url('visites/'. $item->id )}}"
-                                                ><i class="bx bx-edit-alt me-1"></i> view</a
-                                              >
-                                              <a class="dropdown-item" href="{{url('visites/'. $item->id.'/edit' )}}"
-                                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                              >
-                                              
-                                              <a class="dropdown-item" href="javascript:void(0);"
-                                                title="Delete " onclick="return confirm("confirm delete ?")">
-                                                <form method="POST" action="{{url('visites'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                                  {{method_field('DELETE')}}
-                                                  {{ csrf_field() }} </form>
-              
-                                                <i class="bx bx-trash me-1"></i> Supprimer</a
-                                              >
-                                            </div>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      @endforeach
-                                      
-                                      
-                                    </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                                <!--/ Responsive Table -->
-                                <!-- Vertically Centered Modal -->
-                                <div class="col-lg-4 col-md-6">
-                                  
-                                  <div class="mt-3">
-                                  <!-- Button trigger modal -->
-                                  <button
-                                      type="button"
-                                      class="btn btn-primary"
-                                      
-                                  ><a class="a1" href="{{ route('visites.create', ['dossier_id' => $dossiers->id]) }}"
-                                  
-                                  ><i class='bx bxs-file-plus'></i>   Ajouter</a>
-                                  </button>
-    
-  
-                                  </div>
-                                </div>
-                 
-                              </div>
-                            </div>
+                            
                             <!--/ Basic List group -->
                         
                         <!-- List group with Badges & Pills -->
@@ -746,14 +655,14 @@
                                     ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                   >
                                   
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    title="Delete " onclick="return confirm("confirm delete ?")">
-                                    <form method="POST" action="{{url('traitements'.'/'. $item->id )}}" accept-charset="UTF_8" style="" >
-                                      {{method_field('DELETE')}}
-                                      {{ csrf_field() }} </form>
-  
-                                    <i class="bx bx-trash me-1"></i> Supprimer</a
-                                  >
+                                  <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                </a>
+                                
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('traitements.destroy', $item->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                                 </div>
                               </div>
                             </td>

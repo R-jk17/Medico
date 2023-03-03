@@ -253,6 +253,16 @@
                     </div>
                    
                   </div>
+                  <div class="column">
+                    <div class="input-box">
+                      <label>Montant total</label>
+                      <input type="number" placeholder="1000 DA" name="montant" value="{{$visite->montant}}"required />
+                    </div>
+                    <div class="input-box">
+                      <label>versement</label>
+                      <input type="number" name="versement" value="{{$visite->versement}}"required />
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col mb-3">
                       <label for="Descvisite" class="form-label">Description</label>
@@ -265,6 +275,7 @@
                       />
                     </div>
                   </div>
+
                   
                   
                 

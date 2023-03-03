@@ -23,16 +23,22 @@ class DossierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-{
-    $month = $request->input('month');
-    $year = $request->input('year');
-
-    $dossiers = Dossier::whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
-                        ->get();
-
-    return view('dossiers.liste', compact('dossiers'));
-}
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+    
+        $dossiers = Dossier::query();
+    
+        if($month && $year) {
+            $dossiers->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year);
+        }
+    
+        $dossiers = $dossiers->get();
+    
+        return view('dossiers.liste', compact('dossiers'));
+    }
+    
 
     /**
      * Show the form for creating a new resource.

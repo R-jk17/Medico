@@ -6,7 +6,7 @@ use App\Models\Facture;
 use App\Models\Visite;
 use Illuminate\Http\Request;
 
-class FactureController extends Controller
+class ChartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,17 @@ class FactureController extends Controller
      */
     public function index()
     {
-        $factures = Facture::all();
-        
-        return view('factures.liste')->with("facture", $factures);
+        //
     }
+
+    public function chart()
+{
+    $income = Visite::sum('versement');
+    $expenses = Facture::sum('montantT');
+
+    return view('chart', compact('income', 'expenses'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +34,7 @@ class FactureController extends Controller
      */
     public function create()
     {
-        return view("factures.create");
+        //
     }
 
     /**
@@ -38,9 +45,7 @@ class FactureController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        Facture::create($input);
-        return redirect ("factures")->with('flash_message', 'Facture addedd !'); 
+        //
     }
 
     /**
@@ -51,8 +56,7 @@ class FactureController extends Controller
      */
     public function show($id)
     {
-        $facture = Facture::find($id);
-        return view("factures/show")->with('factures', $facture);
+        //
     }
 
     /**
@@ -63,8 +67,7 @@ class FactureController extends Controller
      */
     public function edit($id)
     {
-        $facture = Facture::find($id);
-        return view("factures.edit")->with('factures', $facture);
+        //
     }
 
     /**
@@ -76,31 +79,8 @@ class FactureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->all();
-        $facture = Facture::find($id);
-        $facture->timestamps = false;
-        $facture->update($input);
-        return redirect('factures/'.$id)->with('flash_message', 'Facture edited !');
+        //
     }
-
-    public function chart(Request $request)
-{
-    $month = $request->input('month');
-    $year = $request->input('year');
-
-    $income = Visite::whereMonth('created_at', $month)
-                    ->whereYear('created_at', $year)
-                    ->sum('versement');
-
-    $expenses = Facture::whereMonth('created_at', $month)
-                       ->whereYear('created_at', $year)
-                       ->sum('montantT');
-
-    return view('chart', compact('income', 'expenses'));
-}
-
-
-
 
     /**
      * Remove the specified resource from storage.
