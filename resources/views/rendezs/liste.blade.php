@@ -170,6 +170,12 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
+            <li class="menu-item ">
+              <a href="secritaire/create" class="menu-link">
+                <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
+                <div data-i18n="Basic">Ajouter utilisateur</div>
+              </a>
+            </li>
            
             
           </ul>
@@ -197,21 +203,57 @@
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <form action="" method="get">
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                    name="query"
-                  />
-                </form>
+                    <input
+                      type="text"
+                      class="form-control border-0 shadow-none"
+                      placeholder="Search..."
+                      aria-label="Search..."
+                      name="query"
+                    />
+                  </form>
                 </div>
               </div>
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                  <!-- Authentication Links -->
+        @guest
+        @if (Route::has('login'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+        @endif
+
+        @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif
+    @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </li>
+    @endguest
+
+
+                </ul>
 
                 
               </ul>
@@ -233,52 +275,54 @@
              
   
               <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="list-group list-group-horizontal-md text-md-center">
+                    
+                  <a
+                    class="list-group-item list-group-item-action active"
+                    id="profile-list-item"
+                    data-bs-toggle="list"
+                    href=""
+                    ><i class=" tf-icons bx bxs-calendar"></i> Listes des Rendez-Vous</a
+                  >
+                  
+                  
+                </div>
                 
   
                 <div class="row">
                   <div class="col-md-12">
-                    <form action="" method="get">
-                    <ul class="nav nav-pills flex-column flex-md-row mb-3">
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">From</label>
-                          <input
-                              type="datetime-local"
-                              id="DateOrdonnace"
-                              class="form-control"
-                              name="from"
-                              value="{{ app('request')->input('from') ?? now('GMT+1')->subDays(1) }}"
-
-                          />
-                        </div>
+                    <form method="GET" class="formm" action="{{ route('factures.index') }}" 
+                    style = "display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-content: stretch;
+                    align-items: flex-end;
+                    margin :1rem
+                    " 
+                    >
+                      <div class="form-group" style="margin-right: 8px;">
+                          <label for="month">Month:</label>
+                          <select class="form-control" id="month" name="month">
+                              <option value="">All</option>
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                          </select>
                       </div>
-                      </li>
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">To</label>
-                          <input
-                              type="datetime-local"
-                              id="DateOrdonnace"
-                              class="form-control"
-                              name="to"
-                              value="{{ app('request')->input('to') ?? now('GMT+1') }}"
-                          />
-                        </div>
+                      <div class="form-group" style="margin-right: 8px;">
+                          <label for="year">Year:</label>
+                          <input type="number" class="form-control" id="year" name="year" min="1900" max="{{ date('Y') }}" value="{{ date('Y') }}">
                       </div>
-                      </li>
-                      <li class="nav-item">
-                      <div class="row">
-                        <div class="col mb-3">
-                          <label for="DateOrdonnace" class="form-label">.</label>
-                          <button 
-                          class="form-control" type="submit">SEND</button>
-                        </div>
-                      </div>
-                      </li>
-                      
-                    </ul>
+                      <button type="submit" class="btn btn-primary">Filter</button>
                   </form>
                     <!-- Basic Bootstrap Table -->
                 <div class="card">
@@ -312,21 +356,14 @@
                               </button>
                               <div class="dropdown-menu">
                                 
-                                <a class="dropdown-item" href="{{ route('rendez.confirm', $item->id) }}" 
-
-                                  ><i class='bx bxs-calendar-check'></i> Confirmer</a
-                                >
+                                
                                 <a class="dropdown-item" href="{{url('rendezs/'. $item->id )}}"
                                   ><i class='bx bx-file'></i></i> Show</a
                                 >
                                 
-                                <a class="dropdown-item" href="{{url('rendezs/'. $item->id.'/edit' )}}"
-                                  ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                >
-                                
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
                                   <i class="bx bx-trash me-1"></i> Supprimer
-                              </a>
+                                </a>
                               
                               <form id="delete-form-{{ $item->id }}" action="{{ route('rendezs.destroy', $item->id) }}" method="POST" style="display: none;">
                                   @csrf

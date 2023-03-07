@@ -14,13 +14,29 @@ class RendezController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $rendezs = Rendez::all();
-        
-        
-        return view("rendezs.liste")->with("rendez", $rendezs);
+    public function index(Request $request)
+{
+    $query = request()->input("query");
+    $month = $request->input('month');
+    $year = $request->input('year');
+    $rendezs = Rendez::query();
+    if ($month && $year) {
+        $rendezs->whereMonth('created_at', $month)
+                ->whereYear('created_at', $year);
     }
+
+    $rendezs = $rendezs->where(function ($q) use ($query) {
+            $q->where('nom', 'like', '%' . $query . '%')
+              ->orWhere('prenom', 'like', '%' . $query . '%')
+              ->orWhere('tlf', 'like', '%' . $query . '%')
+              ->orWhere('adress', 'like', '%' . $query . '%')
+              ->orWhere('gender', 'like', '%' . $query . '%');
+        })
+        ->get();
+
+    return view("rendezs.liste")->with("rendez", $rendezs);
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,7 +58,7 @@ class RendezController extends Controller
     {
         $input = $request->all();
         Rendez::create($input);
-        return redirect ("rendezs")->with('success', 'Rendez addedd !'); 
+        return redirect ("home")->with('success', 'Rendez addedd !'); 
     }
 
     public function confirm($id)
@@ -56,6 +72,9 @@ class RendezController extends Controller
     'nompatient' => $rendez->nom,
     'prenompatient' => $rendez->prenom,
     'tlfp' => $rendez->tlf,
+    'gender'=> $rendez->gender,
+    'datenaissance'=> $rendez->dateN,
+    'addressp'=> $rendez->adress,
     ]);
 
 
@@ -125,8 +144,9 @@ class RendezController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Rendez $rendez)
     {
-        //
+        $rendez->delete();
+    return redirect()->route('rendezs.index')->with('success', 'Rendez has been deleted');
     }
 }

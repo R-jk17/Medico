@@ -133,9 +133,9 @@ class OrdonnanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ordonnance $ordonnance)
     {
-        Ordonnance::destroy($id);
-        return redirect('ordonnances')->with('flash_message', 'Ordonnance deleted !');
+        $ordonnance->delete();
+    return redirect()->route('ordonnances.index')->with('success', 'Ordonnance has been deleted');
     }
 }

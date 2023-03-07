@@ -61,17 +61,18 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
+                  <form action="" method="get">
+                    <input
+                      type="text"
+                      class="form-control border-0 shadow-none"
+                      placeholder="Search..."
+                      aria-label="Search..."
+                      name="query"
+                    />
+                  </form>
                 </div>
               </div>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+              
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
@@ -129,8 +130,10 @@
           
         <div class="content-wrapper">
 
+          @if (auth()->user()->usertype == "1")
             <!-- Content -->
             <div class="demo-inline-spacing accl">
+
 
               <button type="button" class="btn btn-xl btn-primary" >
                 <a class="a1" href="rendezs/create"><i class="tf-icons bx bx-file">
@@ -143,6 +146,27 @@
               </button>
 
             </div>
+            @endif 
+
+            
+                
+                
+            <div class="list-group list-group-horizontal-md text-md-center">
+                    
+              <a
+                class="list-group-item list-group-item-action active"
+                id="profile-list-item"
+                data-bs-toggle="list"
+                href="" style="margin-top: 3rem;"
+                ><i class=" tf-icons bx bx-user"></i> Liste d'attends</a
+              >
+              
+              
+            </div>
+                
+             
+           
+
 
             <!-- Tabs -->
            
@@ -152,7 +176,8 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  
+
+
                   <!-- Basic Bootstrap Table -->
               <div class="card">
                 <h5 class="card-header">Table Basic</h5>
@@ -166,7 +191,10 @@
                           <th>prénom</th>
                           <th>N°Tlf</th>
                           <th>gender</th>
+                          @if (auth()->user()->usertype == "1")
+
                           <th>Actions</th>
+                          @endif
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -179,34 +207,34 @@
                         <td>{{$appointment->prenom }}</td>
                         <td>{{$appointment->tlf }}</td>
                         <td>{{$appointment->gender }}</td>
+                        @if (auth()->user()->usertype == "1")
                         <td>
                           <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                               <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{url('rendezs/'. $appointment->id )}}"
-                                ><i class='bx bx-file'></i></i>Show</a
-                              >
+                              
                               <a class="dropdown-item" href="{{ route('rendez.confirm', $appointment->id) }}" 
 
-                                ><i class="bx bx-edit-alt me-1"></i> Confirmer</a
+                                ><i class='bx bxs-calendar-check'></i>  Confirmer</a
                               >
                               <a class="dropdown-item" href="{{url('rendezs/'. $appointment->id.'/edit' )}}"
                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                               >
                               
-                              <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                              <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $appointment->id }}').submit();">
                                 <i class="bx bx-trash me-1"></i> Supprimer
                             </a>
                             
-                            <form id="delete-form-{{ $item->id }}" action="{{ route('rendezs.destroy', $item->id) }}" method="POST" style="display: none;">
+                            <form id="delete-form-{{ $appointment->id }}" action="{{ route('rendezs.destroy', $appointment->id) }}" method="POST" style="display: none;">
                                 @csrf
                                 @method('DELETE')
                             </form>
                             </div>
                           </div>
                         </td>
+                        @endif
                       </tr>
                       @endforeach
                       @else
@@ -226,11 +254,15 @@
               </div>
               <!--/ Basic Bootstrap Table -->
 
+              
+
 
 
                     </div>
+                    
                   </div>
                 </div>
+                
               </div>
 
             

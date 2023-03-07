@@ -15,6 +15,7 @@ class Document extends Model
      */
     protected $fillable = [
         'datedocuments',
+        'nomdocuments',
         'descriptiondocuments',
         'file',
         
@@ -26,4 +27,17 @@ class Document extends Model
     }
 
     
+
+
+    
+}
+
+class DocumentPolicy
+{
+    public function download(User $user, Document $document)
+    {
+        // Check if the user has permission to download the file
+        // For example, you can check if the user has access to the document's dossier
+        return $user->hasAccessToDossier($document->dossier);
+    }
 }

@@ -102,9 +102,9 @@ class TraitementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Traitement $traitement)
     {
-        Traitement::destroy($id);
-        return redirect('traitements')->with('flash_message', 'Traitement deleted !');
+        $traitement->delete();
+    return redirect()->route('traitements.index')->with('success', 'Traitement has been deleted');
     }
 }

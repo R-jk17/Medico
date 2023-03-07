@@ -25,7 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $appointments = Rendez::whereDate('date', Carbon::today())->get();
+        $query = request()->input("query");
+        $appointments = Rendez::whereDate('date', Carbon::today())->where(function ($q) use ($query) {
+            $q->where('nom', 'like', '%' . $query . '%')
+              ->orWhere('prenom', 'like', '%' . $query . '%')
+              ->orWhere('tlf', 'like', '%' . $query . '%')
+              ->orWhere('adress', 'like', '%' . $query . '%')
+              ->orWhere('gender', 'like', '%' . $query . '%');
+        })
+        ->get();
         return view('home', compact('appointments'));
     }
 }

@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Medico - patient </title>
+    <title>Medico - Agenda</title>
 
     <meta name="description" content="" />
 
@@ -135,8 +135,8 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-             <!-- Dashboard -->
-             <li class="menu-item ">
+            <!-- Dashboard -->
+            <li class="menu-item ">
               <a href="home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
@@ -145,7 +145,7 @@
 
             <!-- Cards -->
             <li class="menu-item">
-              <a href="rendezs" class="menu-link">
+              <a href="html/reservation.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
@@ -158,16 +158,7 @@
               </a>
             </li>
 
-            <li class="menu-item ">
-              <a href="factures" class="menu-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
-                  <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                  <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
-                </svg> 
-                <div data-i18n="Basic">Comptabilité</div>
-              </a>
-            </li>
+            
            
             
           </ul>
@@ -179,7 +170,39 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <i class="bx bx-search fs-4 lh-0"></i>
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none"
+                    placeholder="Search..."
+                    aria-label="Search..."
+                  />
+                </div>
+              </div>
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Place this tag where you want the button to render. -->
+                
+
+                
+              </ul>
+            </div>
+          </nav>
 
           <!-- / Navbar -->
 
@@ -188,163 +211,35 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"></span>Fiche Medical</h4>
 
-              <div class="row">
-                <div class="col-md-12">
-                  
-                  <div class="card mb-4">
+             
+              
+  
+              <!-- Tabs -->
+             
+  
+              <div class="container-xxl flex-grow-1 container-p-y">
+                
+  
+                <div class="row">
+                  <div class="col-md-12">
                     
-                    
-                    <div class="card-body">
-                      <form id="fichemedical" action="{{url('dossiers')}}" class="form1" method="post">
-                  
-                        {!! csrf_field()!!}
-                        <div class="row">
-                          <div class="mb-3 col-md-6">
-                            <label for="nompatient" class="form-label">Nom</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="nompatient"
-                              name="nompatient"
-                              value="{{$dossiers->nompatient}}"
-                              autofocus
-                            />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="prenompatient" class="form-label">Prénom</label>
-                            <input class="form-control" type="text" name="prenompatient" id="prenompatient" value="{{$dossiers->prenompatient}}" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="datenaissancepatient" class="form-label">Date de Naissance</label>
-                            <input
-                              class="form-control"
-                              type="date"
-                              id="datenaissance"
-                              name="datenaissance"
-                              value="{{$dossiers->datenaissance}}"
-                            />
-                          </div>
-                          <div class="gender-box">
-                            <h3>Gender</h3>
-                            <div class="gender-option">
-                              <div class="gender">
-                                <input type="radio" id="check-male" name="gender"  value="Male" value="{{$dossiers->gender}}"/>
-                                <label for="check-male">male</label>
-                              </div>
-                              <div class="gender">
-                                <input type="radio" id="check-female" name="gender" value="Female" value="{{$dossiers->gender}}"/>
-                                <label for="check-female" >Female</label>
-                              </div>
-        
-                            </div>
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="situation" class="form-label">Situation familiale</label>
-                            <select id="situation" class="select2 form-select" name="situation">
-                              
-                              <option value="Marié/e">Marié/e</option>
-                              <option value="Célibataire">Célibataire</option>
-                              <option value="Divorcé/e">Divorcé/e</option>
-                              
-                            </select>
-                          </div>
-                          
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="ntlf">N°Tlf</label>
-                            <div class="input-group input-group-merge">
-                              <span class="input-group-text">ALG (+213)</span>
-                              <input
-                                type="text"
-                                id="tlfp"
-                                name="tlfp"
-                                class="form-control"
-                                value="{{$dossiers->tlfp}}"
-                              />
-                            </div>
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="addressp" placeholder="Address" value="{{$dossiers->addressp}}"/>
-                          </div>
-                          
-                          <div class="mb-3 col-md-6">
-                            <label for="taille" class="form-label">taille</label>
-                            <input type="number" class="form-control" id="taille" name="taille"  />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="poids" class="form-label">Poids</label>
-                            <input class="form-control" type="number" id="poids" name="poids" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="groupesang" class="form-label">groupe sanguin</label>
-                            <select id="groupesang" class="select2 form-select" name="groupesang">
-                              
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="A+">AB+</option>
-                              <option value="A-">AB-</option>
-                              <option value="B+">O+</option>
-                              <option value="B-">O-</option>
-                            </select>
-                          </div>
-                          <div class="mb-3 col-md-6">
-                                <label>Maladie chronique</label>
-                                <input type="text" class="form-control" id="Maladiechronique" name="Maladiechronique" placeholder="Diabete" />
-                          </div>
-                          
-                          <div class="mb-3 col-md-6">
-                              <label>Allergie</label>
-                              <input type="text" class="form-control" id="allergie" name="allergie"  />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label>Allergie aux médicaments</label>
-                            <input type="text" class="form-control" id="allergiemedicament" name="allergiemedi"  />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label>Antécédents Médicaux</label>
-                            <input type="text" class="form-control" id="antemed" name="antemedi"  />
-                           
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label>Antécédents Chirurgicaux</label>
-                            <input type="text" class="form-control" id="antech" name="antechir"  />
-                           
-                          </div>
+                    @if ($document)
+    <h1>Document details</h1>
+    
+    <p>Date: {{ $document->created_at }}</p>
 
-                          <div class="mb-3 col-md-6">
-                          
-                            <label>Traitment en cours</label>
-                            <input type="text" class="form-control" id="traitment" name="traitment"  />
-                           
-                          </div>
-                         
-                          <div class="mb-3 col-md-6">
-                            <label>date debut</label>
-                            <input type="date" class="form-control" id="datedebuttraitement" name="datedebuttraitement"  />  
-                          </div>
-                          
+    <p>Description: {{ $document->descriptiondocuments }}</p>
 
-                        </div>
-                        
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">Save</button>
-                      </form>
-                    </div>
-                    <!-- /Account -->
-                  </div>
+    <p>File:  <a href="{{ asset($document->file) }}" target="_blank">{{ $document->file }}</a></p>
+
+    <p>Dossier: {{ $document->dossier->nompatient }} {{ $document->dossier->prenompatient }}</p>
+@else
+    <p>Document not found</p>
+@endif
 
 
 
-                  
-                  
-
-
-                </div>
-              </div>
             </div>
             <!-- / Content -->
 
@@ -362,7 +257,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    
+
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -380,7 +275,6 @@
     <script src="../assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="../assets/js/pages-account-settings-account.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

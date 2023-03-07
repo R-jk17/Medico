@@ -10,6 +10,7 @@ use App\Http\Controllers\VisiteController;
 use App\Http\Controllers\RendezController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\SecritaireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,11 @@ Route::get('/dossiers/{dossier_id}/visites/create', [VisiteController::class, 'c
 Route::get('/dossiers/{dossier_id}/documents/create', [DocumentController::class, 'create'])->name('documents.create');
 Route::get('/rendezs/confirm/{id}', [RendezController::class, 'confirm'])->name('rendez.confirm');
 Route::get('/chart', [FactureController::class, 'chart'])->name('factures.chart');
+Route::get('/secritaire/create', [SecritaireController::class, 'create'])->name('secritaire.create');
+Route::post('/secritaire', [SecritaireController::class, 'store'])->name('secritaire.store');
+
+Route::get('/download/{document}', [DocumentController::class, 'download'])->name('document.download');
+
 
 //Route::get('ordonnances/liste', [OrdonnanceController::class,'index']);
 //Route::get('ordonnances/create', [OrdonnanceController::class,'create']);

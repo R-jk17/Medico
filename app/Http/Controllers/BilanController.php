@@ -106,9 +106,9 @@ class BilanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bilan $bilan)
     {
-        Bilan::destroy($id);
-        return redirect('bilans')->with('flash_message', 'Bilan deleted !');
+        $bilan->delete();
+        return redirect()->route('bilans.index')->with('success', 'Bilan has been deleted');
     }
 }

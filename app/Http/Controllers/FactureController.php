@@ -13,11 +13,27 @@ class FactureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $factures = Facture::all();
+        $query = request()->input("query");
+        $month = $request->input('month');
+        $year = $request->input('year');
+        $factures = Facture::query();
+        if($month && $year) {
+            $factures->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year);
+
+        }
+    
+        $factures = $factures->where(function ($q) use ($query) {
+            $q->where('nomF', 'like', '%' . $query . '%')
+              ->orWhere('montantT', 'like', '%' . $query . '%');
+              
+        })
+        ->get();
         
-        return view('factures.liste')->with("facture", $factures);
+        
+        return view("factures.liste")->with("facture", $factures);
     }
 
     /**
@@ -108,8 +124,9 @@ class FactureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Facture $facture)
     {
-        //
+        $facture->delete();
+    return redirect()->route('factures.index')->with('success', 'Facture has been deleted');
     }
 }

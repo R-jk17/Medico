@@ -168,7 +168,12 @@
               </a>
             </li>
 
-            
+            <li class="menu-item ">
+              <a href="secritaire/create" class="menu-link">
+                <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
+                <div data-i18n="Basic">Ajouter utilisateur</div>
+              </a>
+            </li>
            
             
           </ul>
@@ -195,19 +200,58 @@
               <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
+                  <form action="" method="get">
+                    <input
+                      type="text"
+                      class="form-control border-0 shadow-none"
+                      placeholder="Search..."
+                      aria-label="Search..."
+                      name="query"
+                    />
+                  </form>
                 </div>
               </div>
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
-                
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                  <!-- Authentication Links -->
+        @guest
+        @if (Route::has('login'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+        @endif
+
+        @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif
+    @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </li>
+    @endguest
+
+
+                </ul>
 
                 
               </ul>
@@ -229,16 +273,82 @@
              
   
               <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="list-group list-group-horizontal-md text-md-center">
+                    
+                  <a
+                    class="list-group-item list-group-item-action active"
+                    id="profile-list-item"
+                    data-bs-toggle="list"
+                    href=""
+                    ><i class=" tf-icons bx bx-file"></i> Listes des Factures</a
+                  >
+                  
+                  
+                </div>
                 
   
                 <div class="row">
+                  
+
                   <div class="col-md-12">
 
-                    
-                    <a href="{{ route('factures.chart') }}" class="btn btn-primary">View Chart</a>
+                    <form method="GET" class="formm" action="{{ route('factures.index') }}" 
+                    style = "display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-content: stretch;
+                    align-items: flex-end;
+                    margin-top :1rem
+                    " 
+                    >
+                      <div class="form-group" style="margin-right: 8px;">
+                          <label for="month">Month:</label>
+                          <select class="form-control" id="month" name="month">
+                              <option value="">All</option>
+                              <option value="1">January</option>
+                              <option value="2">February</option>
+                              <option value="3">March</option>
+                              <option value="4">April</option>
+                              <option value="5">May</option>
+                              <option value="6">June</option>
+                              <option value="7">July</option>
+                              <option value="8">August</option>
+                              <option value="9">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                          </select>
+                      </div>
+                      <div class="form-group" style="margin-right: 8px;">
+                          <label for="year">Year:</label>
+                          <input type="number" class="form-control" id="year" name="year" min="1900" max="{{ date('Y') }}" value="{{ date('Y') }}">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Filter</button>
+                  </form>
 
-                    <!-- Basic Bootstrap Table -->
+                   <!-- Vertically Centered Modal -->
+                   <div class="hhhh">
+                    <div class="col-lg-4 col-md-6">
+                            
+                      <div class="mt-3">
+                      <!-- Button trigger modal -->
+                      <button
+                          type="button"
+                          class="btn btn-primary"
+                          
+                      ><a class="a1" href="{{url('factures/create')}}"
+                            
+                      ><i class='bx bxs-file-plus'></i>   Ajouter</a>
+                      
+                        
+                      </button>
+                      </div>
+                    </div> 
+                    <a href="{{ route('factures.chart') }}" class="btn btn-primary">View Chart</a>
+                   </div>
+                <!-- Basic Bootstrap Table -->
                 <div class="card">
+                  
                   <h5 class="card-header">Factures</h5>
                   <div class="table-responsive text-nowrap">
                     <table class="table">
@@ -287,6 +397,7 @@
                   </div>
                 </div>
                 <!--/ Basic Bootstrap Table -->
+                
 
             </div>
             <!-- / Content -->

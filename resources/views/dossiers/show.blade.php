@@ -139,7 +139,7 @@
           <ul class="menu-inner py-1">
              <!-- Dashboard -->
              <li class="menu-item ">
-              <a href="home" class="menu-link">
+              <a href="../home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
               </a>
@@ -147,21 +147,21 @@
 
             <!-- Cards -->
             <li class="menu-item">
-              <a href="rendezs" class="menu-link">
+              <a href="../rendezs" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
 
             <li class="menu-item active">
-              <a href="dossiers" class="menu-link">
+              <a href="../dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>
             </li>
 
             <li class="menu-item ">
-              <a href="factures" class="menu-link">
+              <a href="../factures" class="menu-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
                   <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -183,36 +183,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar"
-          >
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
-
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
-                  />
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
- 
-              </ul>
-            </div>
-          </nav>
+          
 
           <!-- / Navbar -->
 
@@ -362,7 +333,10 @@
                           
                             <label>Traitment en cours</label>
                             <input type="text" class="form-control" id="traitment" name="traitment" 
-                            disabled value="{{$dossiers->traitment}}" />
+                            disa
+                            
+                            
+                            bled value="{{$dossiers->traitment}}" />
                            
                           </div>
                          
@@ -612,9 +586,83 @@
                     <div class="card-body">
                       <div class="row">
   
-                        <!-- Basic List group -->
-                            
-                            <!--/ Basic List group -->
+                                              <!-- Basic List group -->
+                                              <div class="col-lg-6 mb-4 mb-xl-0">
+                          
+                                                <div class="demo-inline-spacing mt-3">
+                                                  <!-- Responsive Table -->
+                                                  <div class="card">
+                                                    <h5 class="card-header"><b>Document/Images/Vedios</b></h5>
+                                                    <div class="table-responsive text-nowrap">
+                                                      <table class="table">
+                                                      <thead>
+                                                        <tr class="text-nowrap">
+                                                          <th>Date</th>
+                                                          
+                                                          <th>id</th>
+                                                          <th>date</th>
+                                                          <th>action</th>
+                                            
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        @foreach($documents as $item)
+                                                        <tr>
+                                                          <td>{{$item->id }}</td>
+                                                          <td>{{$item->created_at }}</td>
+                                                          <td>
+                                                            <div class="dropdown">
+                                                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                              </button>
+                                                              <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="{{url('documents/'. $item->id )}}"
+                                                                  ><i class="bx bx-edit-alt me-1"></i> view</a
+                                                                >
+                                                                <a class="dropdown-item" href="{{url('documents/'. $item->id.'/edit' )}}"
+                                                                  ><i class="bx bx-edit-alt me-1"></i> Edit</a
+                                                                >
+                                                                
+                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                                                  <i class="bx bx-trash me-1"></i> Supprimer
+                                                              </a>
+                                                              
+                                                              <form id="delete-form-{{ $item->id }}" action="{{ route('documents.destroy', $item->id) }}" method="POST" style="display: none;">
+                                                                  @csrf
+                                                                  @method('DELETE')
+                                                              </form>
+                                                              </div>
+                                                            </div>
+                                                          </td>
+                                                        </tr>
+                                                        @endforeach
+                                                        
+                                                      </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                  <!--/ Responsive Table -->
+                                                  <!-- Vertically Centered Modal -->
+                                                  <div class="col-lg-4 col-md-6">
+                                                    
+                                                    <div class="mt-3">
+                                                    <!-- Button trigger modal -->
+                                                    <button
+                                                        type="button"
+                                                        class="btn btn-primary"
+                                                        
+                                                    ><a class="a1" href="{{ route('documents.create', ['dossier_id' => $dossiers->id]) }}"
+                                                        
+                                                    ><i class='bx bxs-file-plus'></i>   Ajouter</a>
+                                                    </button>
+                        
+                        
+                                                    </div>
+                                                  </div>
+                                   
+                                                </div>
+                                              </div>
+                                              <!--/ Basic List group -->
                         
                         <!-- List group with Badges & Pills -->
                         <div class="col-lg-6">
@@ -695,87 +743,13 @@
                             </div>
                       </div>
                     </div>
+
+
                   <hr class="m-0" />
                   <div class="card-body">
                     <div class="row">
   
-                      <!-- Basic List group -->
-                        <div class="col-lg-6 mb-4 mb-xl-0">
-                          
-                          <div class="demo-inline-spacing mt-3">
-                            <!-- Responsive Table -->
-                            <div class="card">
-                              <h5 class="card-header"><b>Document/Images/Vedios</b></h5>
-                              <div class="table-responsive text-nowrap">
-                                <table class="table">
-                                <thead>
-                                  <tr class="text-nowrap">
-                                    <th>Date</th>
-                                    
-                                    <th>id</th>
-                                    <th>date</th>
-                                    <th>action</th>
-                      
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  @foreach($documents as $item)
-                                  <tr>
-                                    <td>{{$item->id }}</td>
-                                    <td>{{$item->created_at }}</td>
-                                    <td>
-                                      <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                          <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                          <a class="dropdown-item" href="{{url('documents/'. $item->id )}}"
-                                            ><i class="bx bx-edit-alt me-1"></i> view</a
-                                          >
-                                          <a class="dropdown-item" href="{{url('documents/'. $item->id.'/edit' )}}"
-                                            ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                          >
-                                          
-                                          <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
-                                            <i class="bx bx-trash me-1"></i> Supprimer
-                                        </a>
-                                        
-                                        <form id="delete-form-{{ $item->id }}" action="{{ route('documents.destroy', $item->id) }}" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  @endforeach
-                                  
-                                </tbody>
-                                </table>
-                              </div>
-                            </div>
-                            <!--/ Responsive Table -->
-                            <!-- Vertically Centered Modal -->
-                            <div class="col-lg-4 col-md-6">
-                              
-                              <div class="mt-3">
-                              <!-- Button trigger modal -->
-                              <button
-                                  type="button"
-                                  class="btn btn-primary"
-                                  
-                              ><a class="a1" href="{{ route('documents.create', ['dossier_id' => $dossiers->id]) }}"
-                                  
-                              ><i class='bx bxs-file-plus'></i>   Ajouter</a>
-                              </button>
-  
-  
-                              </div>
-                            </div>
-             
-                          </div>
-                        </div>
-                        <!--/ Basic List group -->
+
                             
                             
                                 

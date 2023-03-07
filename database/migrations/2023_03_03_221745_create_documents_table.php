@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->date('datedocuments');
+            $table->string('nomdocuments');
             $table->string('descriptiondocuments');
             $table->string('file');
             $table->unsignedBigInteger('dossier_id');

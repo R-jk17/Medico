@@ -48,6 +48,7 @@ class DocumentController extends Controller
         $document = new Document([
             'datedocuments' => $request->get('datedocuments'),
             'descriptiondocuments' => $request->get('descriptiondocuments'),
+            'nomdocuments'=> $request->get('nomdocuments'),
             'file' => $request->file('file')->store('documents'),
             
             //'dossier_id' => $request->get('dossier_id')
@@ -68,9 +69,23 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
+        
         $document = Document::find($id);
         return view("documents/show")->with('document', $document);
     }
+
+    public function download(Document $document)
+{
+    // Check if the user has permission to download the file
+    
+
+    // Get the file path
+    $filePath = storage_path('app/'.$document->file);
+
+    // Return the file as a download response
+    return response()->download($filePath);
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -121,8 +136,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Document $document)
     {
-        //
+        $document->delete();
+        return redirect()->route('documents.index')->with('success', 'Document has been deleted');
     }
 }

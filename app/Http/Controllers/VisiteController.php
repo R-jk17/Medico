@@ -102,9 +102,9 @@ class VisiteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Visite $visite)
     {
-        Visite::destroy($id);
-        return redirect('visites')->with('flash_message', 'Visite deleted !');
+        $visite->delete();
+    return redirect()->route('dossiers.show')->with('success', 'Visite has been deleted');
     }
 }

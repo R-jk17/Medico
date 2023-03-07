@@ -116,3 +116,11 @@ let menu, animate;
   // Auto update menu collapsed/expanded based on the themeConfig
   window.Helpers.setCollapsed(true, false);
 })();
+
+$(document).ready(function() {
+  $('#add-medication-btn').click(function() {
+    var $medicationInputs = $('.medication-input:last').parent().clone();
+    $medicationInputs.find('.medication-input').val('');
+    $('#add-medication-btn').before($medicationInputs);
+  });
+});

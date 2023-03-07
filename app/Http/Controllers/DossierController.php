@@ -24,6 +24,7 @@ class DossierController extends Controller
      */
     public function index(Request $request)
     {
+        $query = request()->input("query");
         $month = $request->input('month');
         $year = $request->input('year');
     
@@ -34,7 +35,14 @@ class DossierController extends Controller
                     ->whereYear('created_at', $year);
         }
     
-        $dossiers = $dossiers->get();
+        $dossiers = $dossiers->where(function ($q) use ($query) {
+            $q->where('nompatient', 'like', '%' . $query . '%')
+              ->orWhere('prenompatient', 'like', '%' . $query . '%')
+              ->orWhere('tlfp', 'like', '%' . $query . '%')
+              ->orWhere('groupesang', 'like', '%' . $query . '%')
+              ->orWhere('gender', 'like', '%' . $query . '%');
+        })
+        ->get();
     
         return view('dossiers.liste', compact('dossiers'));
     }
@@ -83,7 +91,10 @@ class DossierController extends Controller
     $dossier = new Dossier;
     $dossier->nompatient = $rendez->name;
     $dossier->prenompatient = $rendez->prenom; // Add prenompatient to the Dossier
-    $dossier->tlfp = $input['tlfp'];
+    $dossier->tlfp = $rendez->tlf;
+    $dossier->gender= $rendez->gender;
+    $dossier->datenaissance=$rendez->dateN; // Add prenompatient to the Dossier
+    $dossier->addressp= $rendez->adress;
     // Add any other relevant data from the RendezVous to the Dossier
     $dossier->save();
         //Dossier::create($input);
