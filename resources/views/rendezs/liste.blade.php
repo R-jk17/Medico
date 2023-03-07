@@ -145,6 +145,7 @@
               </a>
             </li>
 
+ @if (auth()->user()->usertype == "1")
             <!-- Cards -->
             <li class="menu-item active">
               <a href="rendezs" class="menu-link">
@@ -152,7 +153,7 @@
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
-
+            @endif
             <li class="menu-item ">
               <a href="dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -170,12 +171,14 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
+            @if (auth()->user()->usertype == "0")
             <li class="menu-item ">
               <a href="secritaire/create" class="menu-link">
                 <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
                 <div data-i18n="Basic">Ajouter utilisateur</div>
               </a>
             </li>
+            @endif
            
             
           </ul>

@@ -138,13 +138,14 @@
 
           <ul class="menu-inner py-1">
              <!-- Dashboard -->
-             <li class="menu-item ">
+            <li class="menu-item ">
               <a href="home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
               </a>
             </li>
 
+ @if (auth()->user()->usertype == "1")
             <!-- Cards -->
             <li class="menu-item">
               <a href="rendezs" class="menu-link">
@@ -152,7 +153,7 @@
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
-
+            @endif
             <li class="menu-item active">
               <a href="dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
@@ -170,13 +171,14 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
-
+            @if (auth()->user()->usertype == "0")
             <li class="menu-item ">
               <a href="secritaire/create" class="menu-link">
                 <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
                 <div data-i18n="Basic">Ajouter utilisateur</div>
               </a>
             </li>
+            @endif
             
           </ul>
         </aside>
@@ -359,9 +361,11 @@
                                 <a class="dropdown-item" href="{{url('dossiers/'. $item->id )}}"
                                   ><i class='bx bx-file'></i></i>Show</a
                                 >
+                                @if (auth()->user()->usertype == "0")
                                 <a class="dropdown-item" href="{{url('dossiers/'. $item->id.'/edit' )}}"
                                   ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                 >
+                                @endif 
                                 
                                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
                                   <i class="bx bx-trash me-1"></i> Supprimer

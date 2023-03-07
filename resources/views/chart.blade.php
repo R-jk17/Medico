@@ -143,20 +143,22 @@
               </a>
             </li>
 
+ @if (auth()->user()->usertype == "1")
             <!-- Cards -->
             <li class="menu-item">
-              <a href="html/reservation.html" class="menu-link">
+              <a href="rendezs" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
-
+            @endif
             <li class="menu-item ">
               <a href="dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>
             </li>
+
             <li class="menu-item active">
               <a href="factures" class="menu-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
@@ -167,6 +169,14 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
+            @if (auth()->user()->usertype == "0")
+            <li class="menu-item ">
+              <a href="secritaire/create" class="menu-link">
+                <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
+                <div data-i18n="Basic">Ajouter utilisateur</div>
+              </a>
+            </li>
+            @endif
 
             
            

@@ -139,30 +139,31 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
-              <a href="home" class="menu-link">
+            <li class="menu-item ">
+              <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
               </a>
             </li>
 
+ @if (auth()->user()->usertype == "1")
             <!-- Cards -->
-            <li class="menu-item">
-              <a href="rendezs" class="menu-link">
+            <li class="menu-item active">
+              <a href="{{ route('rendezs') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
-
+            @endif
             <li class="menu-item ">
-              <a href="dossiers" class="menu-link">
+              <a href="{{ route('dossiers') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>
             </li>
 
             <li class="menu-item ">
-              <a href="factures" class="menu-link">
+              <a href="{{ route('factures') }}" class="menu-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
                   <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -171,6 +172,14 @@
                 <div data-i18n="Basic">Comptabilité</div>
               </a>
             </li>
+            @if (auth()->user()->usertype == "0")
+            <li class="menu-item ">
+              <a href="{{ route('secritaire/create') }}" class="menu-link">
+                <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
+                <div data-i18n="Basic">Ajouter utilisateur</div>
+              </a>
+            </li>
+            @endif
           
             
             
