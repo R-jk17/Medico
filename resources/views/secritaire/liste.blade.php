@@ -27,7 +27,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Medico - Rendez-Vous</title>
+    <title>Medico - Factures</title>
 
     <meta name="description" content="" />
 
@@ -71,15 +71,12 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="../index.html" class="app-brand-link">
+            <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
-                <svg
-                  width="25"
-                  viewBox="0 0 25 42"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-pulse-fill" viewBox="0 0 16 16">
+                  <path d="M1.475 9C2.702 10.84 4.779 12.871 8 15c3.221-2.129 5.298-4.16 6.525-6H12a.5.5 0 0 1-.464-.314l-1.457-3.642-1.598 5.593a.5.5 0 0 1-.945.049L5.889 6.568l-1.473 2.21A.5.5 0 0 1 4 9H1.475Z"/>
+                  <path d="M.88 8C-2.427 1.68 4.41-2 7.823 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C11.59-2 18.426 1.68 15.12 8h-2.783l-1.874-4.686a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.88Z"/>
+                </svg>
                   <defs>
                     <path
                       d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
@@ -127,7 +124,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+              <span class="app-brand-text demo menu-text fw-bolder ms-2">Medico</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -140,7 +137,7 @@
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item ">
-              <a href="{{ route('home') }}" class="menu-link">
+              <a href="home" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Accueil</div>
               </a>
@@ -148,22 +145,22 @@
 
  @if (auth()->user()->usertype == "1")
             <!-- Cards -->
-            <li class="menu-item active">
-              <a href="{{ route('rendezs.index') }}" class="menu-link">
+            <li class="menu-item">
+              <a href="rendezs" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
             @endif
             <li class="menu-item ">
-              <a href="{{ route('dossiers.index') }}" class="menu-link">
+              <a href="dossiers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>
             </li>
 
-            <li class="menu-item ">
-              <a href="{{ route('factures.index') }}" class="menu-link">
+            <li class="menu-item active">
+              <a href="factures" class="menu-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="menu-icon bi bi-coin" viewBox="0 0 16 16">
                   <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -174,24 +171,95 @@
             </li>
             @if (auth()->user()->usertype == "0")
             <li class="menu-item ">
-              <a href="{{ route('secritaire/create') }}" class="menu-link">
+              <a href="secritaire/liste" class="menu-link">
                 <i class="menu-icon tf-icons  bx bxs-file-plus"></i>
                 <div data-i18n="Basic">Ajouter utilisateur</div>
               </a>
             </li>
             @endif
-          
-            
+           
             
           </ul>
         </aside>
+        <!-- / Menu -->
         <!-- / Menu -->
 
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
 
-          
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar"
+          >
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                <i class="bx bx-menu bx-sm"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <i class="bx bx-search fs-4 lh-0"></i>
+                  <form action="" method="get">
+                    <input
+                      type="text"
+                      class="form-control border-0 shadow-none"
+                      placeholder="Search..."
+                      aria-label="Search..."
+                      name="query"
+                    />
+                  </form>
+                </div>
+              </div>
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <!-- Place this tag where you want the button to render. -->
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ms-auto">
+                  <!-- Authentication Links -->
+        @guest
+        @if (Route::has('login'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li>
+        @endif
+
+        @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif
+    @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }}
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </div>
+        </li>
+    @endguest
+
+
+                </ul>
+
+                
+              </ul>
+            </div>
+          </nav>
 
           <!-- / Navbar -->
 
@@ -200,72 +268,106 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <section class="container">
-                
 
-                <header>Rendez-Vous</header>
-                <form action="{{url('rendezs')}}" class="form1" method="post">
-                  @if (session('error'))
-                     <div class="alert alert-danger">
-                        {{ session('error') }}
-                     </div>
-                  @endif
-                    {!! csrf_field()!!}
-
-                    <div class="input-box time">
-                        <label>L'heure</label>
-                        <input class="form-control" type="time" value="12:30:00" id="html5-time-input" name="heure" />
-                    </div>
-                    <div class="input-box">
-                        <label>Date</label>
-                        <input type="date" placeholder="La date" name="date" required />
-                    </div>
-    
-                    <div class="input-box">
-                        <label>Nom</label>
-                        <input type="text" placeholder="Enter full name" name="nom" required />
-                    </div>
-                    <div class="input-box">
-                        <label>Prénom</label>
-                        <input type="text" placeholder="Enter full name" name="prenom" required />
-                    </div>
+             
               
-                      <div class="input-box address">
-                        <label>Address</label>
-                        <input type="text" placeholder="Enter street address" name="adress" required />
-                      </div>
-              
-                      <div class="column">
-                        <div class="input-box">
-                          <label>N°Tlf</label>
-                          <input type="number" placeholder="Enter phone number" name="tlf" required />
-                        </div>
-                        <div class="input-box">
-                          <label>Date du Naissance</label>
-                          <input type="date" placeholder="Enter birth date" name="dateN" required />
-                        </div>
-                      </div>
-                      <div class="gender-box">
-                        <h3>Gender</h3>
-                        <div class="gender-option">
-                          <div class="gender">
-                            <input type="radio" id="check-male" name="gender" value="Male" checked />
-                            <label for="check-male">male</label>
-                          </div>
-                          <div class="gender">
-                            <input type="radio" id="check-female" name="gender" value="Female"/>
-                            <label for="check-female" >Female</label>
-                          </div>
-    
-                        </div>
-                      </div>
+  
+              <!-- Tabs -->
+             
+  
+              <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="list-group list-group-horizontal-md text-md-center">
+                    
+                  <a
+                    class="list-group-item list-group-item-action active"
+                    id="profile-list-item"
+                    data-bs-toggle="list"
+                    href=""
+                    ><i class=" tf-icons bx bx-file"></i> Listes des Factures</a
+                  >
                   
                   
+                </div>
                 
+  
+                <div class="row">
+                  
+
+                  <div class="col-md-12">
+
+                    
+
+                   <!-- Vertically Centered Modal -->
+                   <div class="hhhh">
+                    @if (auth()->user()->usertype == "0")
+                    <div class="col-lg-4 col-md-6">
+                            
+                      <div class="mt-3">
+                      <!-- Button trigger modal -->
+                      <button
+                          type="button"
+                          class="btn btn-primary"
+                          
+                      ><a class="a1" href="{{route('secritaires.create')}}"
+                            
+                      ><i class='bx bxs-file-plus'></i>   Ajouter</a>
+                      
+                        
+                      </button>
+                      </div>
+                    </div>
+                    @endif 
+                    
+                   </div>
+                <!-- Basic Bootstrap Table -->
+                <div class="card">
+                  
+                  <h5 class="card-header">Secritaire</h5>
+                  <div class="table-responsive text-nowrap">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="table-border-bottom-0">
+                        @foreach($secritaires as $item)
+                        <tr>
+                          <td>{{$item->dateF }}</td>
+                          <td>{{$item->nomF }}</td>
+                          <td>
+                            <div class="dropdown">
+                              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                               
+                               
+                                
+                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();">
+                                  <i class="bx bx-trash me-1"></i> Supprimer
+                              </a>
+                              
+                              <form id="delete-form-{{ $item->id }}" action="{{ route('secritaire.destroy', $item->id) }}" method="POST" style="display: none;">
+                                  @csrf
+                                  @method('DELETE')
+                              </form>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        @endforeach
+                       
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!--/ Basic Bootstrap Table -->
                 
-                  <button type="submit">Save</button>
-                </form>
-              </section>
 
             </div>
             <!-- / Content -->

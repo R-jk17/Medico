@@ -32,7 +32,7 @@ class HomeController extends Controller
               ->orWhere('tlf', 'like', '%' . $query . '%')
               ->orWhere('adress', 'like', '%' . $query . '%')
               ->orWhere('gender', 'like', '%' . $query . '%');
-        })
+        })->orderBy('heure')
         ->get();
         return view('home', compact('appointments'));
     }

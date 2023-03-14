@@ -52,7 +52,7 @@ class SecritaireController extends Controller
         'email' => $request->get('email'),
         'password' => Hash::make($request->get('password')),
         // Set the usertype based on the user role
-        'usertype' => $request->get('role') == 'secritaire' ? 1 : 0,
+        'usertype' => $request->get('role') == 'secritaire' ? 0 : 1,
     ]);
 
     $user->save();

@@ -146,14 +146,14 @@
  @if (auth()->user()->usertype == "1")
             <!-- Cards -->
             <li class="menu-item">
-              <a href="rendezs" class="menu-link">
+              <a href="rendezs.index" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-table"></i>
                 <div data-i18n="Basic">Agenda</div>
               </a>
             </li>
             @endif
             <li class="menu-item ">
-              <a href="dossiers" class="menu-link">
+              <a href="dossiers.index" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Patient</div>
               </a>

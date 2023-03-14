@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Dossier;
 use App\Models\Rendez;
 use App\Models\Visite;
+use Carbon\Carbon;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 
@@ -55,15 +56,34 @@ class RendezController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $input = $request->all();
-        Rendez::create($input);
-        return redirect ("home")->with('success', 'Rendez addedd !'); 
+{
+    $input = $request->all();
+
+    // Check if a rendezvous already exists with the same date and heure
+    $existingRendez = Rendez::where('date', $input['date'])
+                            ->where('heure', $input['heure'])
+                            ->first();
+
+    if ($existingRendez) {
+        // Add an error message to the session
+        $request->session()->flash('error', 'A rendezvous already exists with the same date and heure.');
+
+        // Redirect back to the create page with the old input
+        return redirect()->back()->withInput();
     }
+
+    // Create the rendezvous if it doesn't already exist
+    Rendez::create($input);
+
+    // Redirect to the home page with a success message
+    return redirect("home")->with('success', 'Rendez added!');
+}
+
 
     public function confirm($id)
 {
     $rendez = Rendez::findOrFail($id);
+    //$rendez->status = 'confirmed';
     
     
 
@@ -97,6 +117,18 @@ class RendezController extends Controller
 
     return redirect('dossiers');
 }
+
+ public function retarder($id)
+{
+    $rendez = Rendez::findOrFail($id);
+    $rendez->heure = Carbon::parse($rendez->heure)->addMinutes(20);
+    //$rendez->status = 'Retarder';
+    $rendez->save();
+
+    return redirect()->back()->with('success', 'Le rendez-vous a été retardé de 20 minutes.');
+}
+
+
 
     /**
      * Display the specified resource.

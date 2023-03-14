@@ -340,7 +340,7 @@
                           type="button"
                           class="btn btn-primary"
                           
-                      ><a class="a1" href="{{url('factures/create')}}"
+                      ><a class="a1" href="{{route('factures.create')}}"
                             
                       ><i class='bx bxs-file-plus'></i>   Ajouter</a>
                       

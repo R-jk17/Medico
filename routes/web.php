@@ -52,6 +52,7 @@ Route::get('/dossiers/{dossier_id}/traitements/create', [TraitementController::c
 Route::get('/dossiers/{dossier_id}/visites/create', [VisiteController::class, 'create'])->name('visites.create');
 Route::get('/dossiers/{dossier_id}/documents/create', [DocumentController::class, 'create'])->name('documents.create');
 Route::get('/rendezs/confirm/{id}', [RendezController::class, 'confirm'])->name('rendez.confirm');
+Route::get('/rendezs/retarder/{id}', [RendezController::class, 'retarder'])->name('rendez.retarder');
 Route::get('/chart', [FactureController::class, 'chart'])->name('factures.chart');
 Route::get('/secritaire/create', [SecritaireController::class, 'create'])->name('secritaire.create');
 Route::post('/secritaire', [SecritaireController::class, 'store'])->name('secritaire.store');

@@ -197,8 +197,8 @@
                           @endif
                         </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
-                      @if(count($appointments))
+                    <tbody >
+                      
                       @foreach($appointments as $appointment)
                       <tr>
                         <td>{{$appointment->heure }}</td>
@@ -219,6 +219,11 @@
 
                                 ><i class='bx bxs-calendar-check'></i>  Confirmer</a
                               >
+                              <a class="dropdown-item" href="{{ route('rendez.retarder', $appointment->id) }}" 
+
+                                ><i class='bx bxs-calendar-check'></i> Retarder</a
+                              >
+
                               <a class="dropdown-item" href="{{url('rendezs/'. $appointment->id.'/edit' )}}"
                                 ><i class="bx bx-edit-alt me-1"></i> Edit</a
                               >
@@ -237,14 +242,8 @@
                         @endif
                       </tr>
                       @endforeach
-                      @else
-                      <td></td>
-                        
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      @endif
+                      
+                     
                        
                      
                       
